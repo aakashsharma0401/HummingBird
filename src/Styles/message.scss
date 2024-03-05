@@ -1,0 +1,66 @@
+@mixin mobile{
+    @media screen and (max-width:480px) {
+        @content;
+    }
+}
+@mixin tablet{
+    @media screen and (max-width:768px) {
+        @content;
+    }
+}
+@mixin laptop{
+    @media screen and (max-width:1200px) {
+        @content;
+    }
+}
+.message{
+    display: flex;
+    gap: 20px;
+ &.owner{
+    flex-direction: row-reverse;
+    .messagecontent{
+        align-items: flex-end;
+    }
+    p{
+        background-color: #8da4f1;
+        color: white;
+        border-radius: 10px 0px 10px 11px   ;
+     }
+ }
+ 
+  
+}
+
+
+.messageInfo{
+    display: flex;
+    flex-direction: column;
+    color: gray;
+
+}
+
+.messageInfo img{
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+
+}
+.messagecontent{
+    max-width: 80%;
+    display: flex;
+    gap: 10px;
+    flex-direction: column;
+
+}
+.pa{
+    background-color: white;
+    padding: 10px;
+    border-radius: 0px 10px 10px 10px;
+    max-width: max-content;
+}
+.messagecontent img{
+    width: 50%;
+    
+}
+
