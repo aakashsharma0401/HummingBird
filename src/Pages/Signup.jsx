@@ -31,8 +31,8 @@ const Signup = () => {
       toast.success(response?.message);
       navigate("/");
     }
-    else if (data?.status == false) {
-      toast.error(data?.message);
+    else if (response?.status == false) {
+      toast.error(response?.message);
     }
   
   }, [response]);
@@ -50,8 +50,32 @@ const Signup = () => {
               style={{ fontSize: "48px", color: "#4C489D" }}
             ></i>
             <form className="login" onSubmit={handleSubmit(onSubmit)}>
-              <div className="login__field">
+            <div className="login__field">
                 <i className="login__icon fa fa-user"></i>
+                <input
+                  type="text"
+                  className="login__input"
+                  placeholder="Enter your name"
+                  {...register("User_Name", { required: true })}
+                />
+                {errors.User_Name && (
+                  <span
+                    style={{
+                      color: "red",
+                      fontSize:"15px",
+                      fontWeight: "bold",
+                      fontFamily: "monospace",
+                      position:"fixed",
+                      marginTop:"21px",
+                      marginLeft:"0px"
+                    }}
+                  >
+                    required
+                  </span>
+                )}
+              </div>
+              <div className="login__field">
+                <i className="login__icon fa fa-phone"></i>
                 <input
                   type="number"
                   className="login__input"
@@ -62,15 +86,18 @@ const Signup = () => {
                     minLength: 10,
                   })}
                 />
-                {errors.phone && (
+                {errors.User_number && (
                   <span
                     style={{
                       color: "red",
                       fontWeight: "bold",
                       fontFamily: "monospace",
+                      position:"fixed",
+                      marginTop:"21px",
+                      marginLeft:"0px"
                     }}
                   >
-                    Invalid Phone number
+                   required
                   </span>
                 )}
               </div>
@@ -82,16 +109,18 @@ const Signup = () => {
                   placeholder="enter password"
                   {...register("User_password", { required: true, minLength: 4 })}
                 />
-                {errors.password && (
+                {errors.User_password && (
                   <span
                     style={{
                       color: "red",
                       fontWeight: "bold",
                       fontFamily: "monospace",
+                      position:"fixed",
+                    marginTop:"21px",
+                    marginLeft:"0px"
                     }}
                   >
-                    {" "}
-                    Invalid
+                   required
                   </span>
                 )}
               </div>
@@ -111,6 +140,7 @@ const Signup = () => {
                     color: "white",
                     fontWeight: "bold",
                     fontStyle: "inherit",
+                    
                   }}
                 >
                   <i class="fa fa-sign-in"></i> Login

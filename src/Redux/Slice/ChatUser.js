@@ -10,15 +10,12 @@ const initialState = {
 //Signup
 export const createUser = createAsyncThunk("CreateUser", async (body) => {
   const Formdata = new FormData();
+  Formdata.append("User_Name", body.User_Name);
   Formdata.append("User_number", body.User_number);
   Formdata.append("User_password", body.User_password);
 
-
   try {
-    const res = await axios.post(
-      "http://localhost:8080/api/Signup",
-      Formdata
-    );
+    const res = await axios.post("http://localhost:8080/api/Signup", Formdata);
     return res.data;
   } catch (error) {
     console.log("error", error);
@@ -29,6 +26,7 @@ export const createUser = createAsyncThunk("CreateUser", async (body) => {
 //Login
 export const loginEmploye = createAsyncThunk("loginEmploye", async (body) => {
   const Formdata = new FormData();
+
   Formdata.append("User_number", body.User_number);
   Formdata.append("User_password", body.User_password);
   try {
@@ -71,7 +69,10 @@ export const ChatUser = createSlice({
       state.isLoading = false;
       state.data = action.payload;
       if (action.payload.status == true) {
+
+        console.log(41,action.payload.data.data );
         localStorage.setItem("authToken", action.payload.data.token);
+        
       }
     });
 

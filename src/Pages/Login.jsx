@@ -1,4 +1,4 @@
-import React,{useEffect} from "react";
+import React, { useEffect } from "react";
 import "../Styles/Login.scss";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
@@ -6,7 +6,6 @@ import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import { loginEmploye } from "../Redux/Slice/ChatUser";
-
 
 const Login = () => {
   const navigate = useNavigate();
@@ -26,8 +25,19 @@ const Login = () => {
   });
   useEffect(() => {
     if (data?.status == true) {
-      toast.success(data?.message);
-      navigate("/DashBoard")
+      toast.success(
+        <h6
+          style={{
+            color: "green",
+            fontFamily: "monospace",
+            fontWeight: "bold",
+            fontSize: "15px",
+          }}
+        >
+          Welcome to HummingBird
+        </h6>
+      );
+      navigate("/DashBoard");
     } else if (data?.status == false) {
       toast.error(data?.message);
     }
@@ -35,7 +45,6 @@ const Login = () => {
   const onSubmit = (data) => {
     dispatch(loginEmploye(data));
   };
-
 
   return (
     <div className="body">
@@ -53,8 +62,23 @@ const Login = () => {
                   type="number"
                   class="login__input"
                   placeholder="Enter Phone Number"
-				  {...register("User_number", { required: true })}
+                  {...register("User_number", { required: true })}
                 />
+                {errors.User_number && (
+                  <span
+                    style={{
+                      color: "red",
+                      fontSize: "15px",
+                      fontWeight: "bold",
+                      fontFamily: "monospace",
+                      position: "fixed",
+                      marginTop: "21px",
+                      marginLeft: "0px",
+                    }}
+                  >
+                    required
+                  </span>
+                )}
               </div>
               <div class="login__field">
                 <i class="login__icon fas fa-lock"></i>
@@ -62,16 +86,45 @@ const Login = () => {
                   type="password"
                   class="login__input"
                   placeholder="Enter Password"
-				  {...register("User_password", { required: true })}
+                  {...register("User_password", { required: true })}
                 />
+                {errors.User_password && (
+                  <span
+                    style={{
+                      color: "red",
+                      fontSize: "15px",
+                      fontWeight: "bold",
+                      fontFamily: "monospace",
+                      position: "fixed",
+                      marginTop: "21px",
+                      marginLeft: "0px",
+                    }}
+                  >
+                    required
+                  </span>
+                )}
               </div>
+              <Link
+                  to={"/forgot"}
+                  style={{
+                    textDecoration: "none",
+                    color: "black",
+                    fontWeight: "bold",
+                    fontStyle: "inherit",
+                    marginTop: "0px",
+                   fontSize:"11px"
+                  }}
+                >
+                  <i class="fa fa-unlock"></i> Forgot Password?
+                </Link>
               <button class="login__submit">
                 <span class="button__text">Log In Now</span>
                 <i class="button__icon fas fa-chevron-right"></i>
               </button>
             </form>
+          
+         
             <div className="social-login">
-              <h3></h3>
               <div className="social-icons">
                 <Link
                   to={"/signup"}

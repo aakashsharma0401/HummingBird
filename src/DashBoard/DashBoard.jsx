@@ -4,6 +4,8 @@ import Chat from './Chat/Chat';
 import "../Styles/DashBoard.scss"
 
 const Home = () => {
+
+ console.log()
   return (
     <div className='home'>
         <div className='container'>
